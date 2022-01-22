@@ -6,6 +6,9 @@
 #include <string.h>
 #include "cmp.h"
 
+#if defined(USE_OPENMP)
+#include <omp.h>
+#endif
 
 void ell_alloc(ell_t **ell, int m, int max_row){
 	
@@ -41,6 +44,7 @@ void ell_free(ell_t *ell){
 
 void ell_spmv(ell_t *a, double *x, double *y){
 	//column major format
+#pragma omp parallel for
 	for(int i = 0; i < a->m; i++){
 		for(int j = 0; j < a->max_row; j++){
 			const int idx = i + j * a->m;

@@ -6,11 +6,6 @@
 #include "loadmm.h"
 #include "SparseMatrix.h"
 
-#define GRN   "\x1B[32m"
-#define RED   "\x1B[31m"
-#define RESET "\x1B[0m"
-#define BLU   "\x1B[34m"
-
 int main(int argc, char** argv) {
 
     //char *filename = "../data/4x4.mtx";
@@ -18,7 +13,7 @@ int main(int argc, char** argv) {
     clock_t t;
 
     if(argv[1] == NULL){
-        fprintf(stderr, RED "Usage: ./1/SpMV.exe YourMatrixMarketFile.mtx\n" RESET);
+        fprintf(stderr, "Usage: ./1/SpMV.exe YourMatrixMarketFile.mtx\n" );
         return 1;
     }else{
         strcpy(filename, argv[1]);
@@ -29,10 +24,10 @@ int main(int argc, char** argv) {
 	mm_file_t *mm_file = loadmm(filename);
     
     //show basic information of loaded matrix
-    printf(BLU "\nLoaded Matrix: \n");
-    printf(BLU "    name: %s\n", filename);
-    printf(BLU "    dim: %d x %d\n", mm_file->nrow, mm_file->ncol);
-    printf(BLU "    nnz: %d\n\n", mm_file->data_size);
+    printf("\nLoaded Matrix: \n");
+    printf("    name: %s\n", filename);
+    printf("    dim: %d x %d\n", mm_file->nrow, mm_file->ncol);
+    printf("    nnz: %d\n\n", mm_file->data_size);
 
 
     double *u = malloc(mm_file->nrow * sizeof(double));
@@ -49,7 +44,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf(RED"dense    : failed for allocation\n"RESET);
+        printf("dense    : failed for allocation\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){
@@ -58,8 +53,9 @@ int main(int argc, char** argv) {
         t = clock();
         dense_spmv(dense, u, v);
         t = clock() - t;
-        printf(GRN "MV (DENSE) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
-        dense_free(dense);
+        printf("MV (DENSE) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
+
+    	dense_free(dense);
     }
 
     //coo
@@ -68,7 +64,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf(RED"coo    : failed for allocation\n"RESET);
+        printf("coo    : failed for allocation\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){
@@ -77,8 +73,9 @@ int main(int argc, char** argv) {
         t = clock();
         coo_spmv(coo, u, v);
         t = clock() - t;
-        printf(GRN "SpMV (COO) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
-        coo_free(coo);
+        printf("SpMV (COO) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
+
+	coo_free(coo);
     }
 
     //csr
@@ -87,16 +84,15 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf(RED"csr    : failed for allocation\n"RESET);
+        printf("csr    : failed for allocation\n");
     }else{
-        
         for(int i = 0; i < mm_file->nrow; i++){
             v[i] = 0.0;
         }
         t = clock();
         csr_spmv(csr, u, v);
         t = clock() - t;
-        printf(GRN "SpMV (CSR) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
+        printf("SpMV (CSR) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
         csr_free(csr);
     }
 
@@ -107,7 +103,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf(RED"ell    : failed for allocation\n"RESET);
+        printf("ell    : failed for allocation\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){
@@ -116,7 +112,7 @@ int main(int argc, char** argv) {
         t = clock();
         ell_spmv(ell, u, v);
         t = clock() - t;
-        printf(GRN "SpMV (ELL) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
+        printf("SpMV (ELL) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
         ell_free(ell);
     }
 
@@ -127,7 +123,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf(RED"dia    : failed for allocation\n"RESET);
+        printf("dia    : failed for allocation\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){
@@ -136,7 +132,7 @@ int main(int argc, char** argv) {
         t = clock();
         dia_spmv(dia, u, v);
         t = clock() - t;
-        printf(GRN "SpMV (DIA) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
+        printf("SpMV (DIA) time: %fs\n", ((double) t )/CLOCKS_PER_SEC);
         dia_free(dia);
     }
 

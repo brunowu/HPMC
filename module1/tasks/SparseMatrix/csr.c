@@ -5,6 +5,9 @@
 #include "csr.h"
 #include <string.h>
 #include "cmp.h"
+#if defined(USE_OPENMP)
+#include <omp.h>
+#endif
 
 void csr_alloc(csr_t **csr, int m, int nnz){
 	
@@ -43,6 +46,7 @@ void csr_free(csr_t *csr){
 }
 
 void csr_spmv(csr_t *a, double *x, double *y){
+#pragma omp parallel for
 	for(int i = 0; i < a->m; i++){
 		for(int j = a->rowoffs[i]; j < a->rowoffs[i+1]; j++){
 			y[i] += a->val[j] * x[a->colind[j]];

@@ -5,18 +5,13 @@
 #include "loadmm.h"
 #include "SparseMatrix.h"
 
-#define GRN   "\x1B[32m"
-#define RED   "\x1B[31m"
-#define RESET "\x1B[0m"
-#define BLU   "\x1B[34m"
-
 int main(int argc, char** argv) {
 
     // char *filename = "../data/4x4.mtx";
 	char filename[60];
 
     if(argv[1] == NULL){
-        fprintf(stderr, RED "Usage: ./1/getMemSize.exe YourMatrixMarketFile.mtx\n" RESET);
+        fprintf(stderr, "Usage: ./1/getMemSize.exe YourMatrixMarketFile.mtx\n" );
         return 1;
     }else{
         strcpy(filename, argv[1]);
@@ -27,10 +22,10 @@ int main(int argc, char** argv) {
 	mm_file_t *mm_file = loadmm(filename);
 
     //show basic information of loaded matrix
-    printf(BLU "\nLoaded Matrix: \n");
-    printf(BLU "    name: %s\n", filename);
-    printf(BLU "    dim: %d x %d\n", mm_file->nrow, mm_file->ncol);
-    printf(BLU "    nnz: %d\n\n"RESET, mm_file->data_size);
+    printf("\nLoaded Matrix: \n");
+    printf("    name: %s\n", filename);
+    printf("    dim: %d x %d\n", mm_file->nrow, mm_file->ncol);
+    printf("    nnz: %d\n\n", mm_file->data_size);
 
     printf("\nBytes / non-zeros Entry\n");
     printf("-----------------------------------------\n");
@@ -46,7 +41,7 @@ int main(int argc, char** argv) {
         printf("-----------------------------------------\n");
         dense_free(dense);  
     }else{
-        printf(RED"dense    : failed for allocation\n"RESET);
+        printf("dense    : failed for allocation\n");
     }
 
     //coo
@@ -58,7 +53,7 @@ int main(int argc, char** argv) {
         printf("-----------------------------------------\n");
         coo_free(coo);  
     }else{
-        printf(RED"coo    : failed for allocation\n"RESET);
+        printf("coo    : failed for allocation\n");
     }
 
     //csr
@@ -70,7 +65,7 @@ int main(int argc, char** argv) {
         printf("-----------------------------------------\n");
         csr_free(csr);  
     }else{
-        printf(RED"csr    : failed for allocation\n"RESET);
+        printf("csr    : failed for allocation\n");
     }
 
     //ell
@@ -82,7 +77,7 @@ int main(int argc, char** argv) {
         printf("-----------------------------------------\n");
         ell_free(ell);  
     }else{
-        printf(RED"ell    : failed for allocation\n"RESET);
+        printf("ell    : failed for allocation\n");
     }
 
     //dia
@@ -94,7 +89,7 @@ int main(int argc, char** argv) {
         printf("-----------------------------------------\n");
         dia_free(dia);  
     }else{
-        printf(RED"dia    : failed for allocation\n"RESET);
+        printf("dia    : failed for allocation\n");
     }
     
     freemm(mm_file);

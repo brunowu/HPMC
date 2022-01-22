@@ -6,4 +6,3 @@
 #include "ell.h"
 #include "dense.h"
 
-

@@ -6,6 +6,10 @@
 #include "dense.h"
 #include "cmp.h"
 
+#if defined(USE_OPENMP)
+#include <omp.h>
+#endif
+
 void dense_alloc(dense_t **dense, int m){
 	
 	*dense = calloc(1, sizeof(dense_t));
@@ -31,7 +35,7 @@ void dense_free(dense_t *dense){
 }
 
 void dense_spmv(dense_t *a, double *x, double *y){
-
+#pragma omp parallel for
 	for(int i = 0; i < a->m; i++){
 		for(int j = 0; j < a->m; j++){
 			y[i] += a->val[i * a->m + j] * x[j];

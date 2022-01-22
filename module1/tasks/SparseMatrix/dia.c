@@ -6,6 +6,10 @@
 #include <string.h>
 #include "cmp.h"
 
+#if defined(USE_OPENMP)
+#include <omp.h>
+#endif
+
 #define max(x,y) (((x) >= (y)) ? (x) : (y))
 #define min(x,y) (((x) <= (y)) ? (x) : (y))
 
@@ -43,7 +47,7 @@ void dia_free(dia_t *dia){
 }
 
 void dia_spmv(dia_t *a, double *x, double *y){
-
+#pragma omp parallel for
 	for(int i = 0; i < a->m; i++){
 		for(int j = 0; j < a->ndiag; j++){
 			int start = max(-a->diag[j], 0);

@@ -6,6 +6,10 @@
 #include "coo.h"
 #include "cmp.h"
 
+#if defined(USE_OPENMP)
+#include <omp.h>
+#endif
+
 void coo_alloc(coo_t **coo, int m, int nnz){
 	
 	*coo = calloc(1, sizeof(coo_t));
@@ -43,7 +47,7 @@ void coo_free(coo_t *coo){
 }
 
 void coo_spmv(coo_t *a, double *x, double *y){
-
+#pragma omp paralllel for
 	for(int i =0; i < a->nnz; i++){
 		y[a->rowind[i]] += a->val[i] * x[a->colind[i]];  
 	}
