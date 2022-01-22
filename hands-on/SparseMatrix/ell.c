@@ -115,7 +115,6 @@ int ell_from_mm_buffer(ell_t **ell, const mm_file_t *mm_file){
 
     if((unsigned long long)mm_file->nrow * (unsigned long long)max_row > (int)((unsigned int)~0 >> 1)){
     	fprintf(stderr, "[ELL]: this matrix is out of range for ELL format\n");
-	    freemm(mm_file);
 	    free(rowoffs);
     	return 1;
     }	
