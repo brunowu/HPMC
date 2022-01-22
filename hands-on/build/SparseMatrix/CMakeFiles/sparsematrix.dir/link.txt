@@ -1,2 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libsparsematrix.a CMakeFiles/sparsematrix.dir/mmio.c.o CMakeFiles/sparsematrix.dir/loadmm.c.o CMakeFiles/sparsematrix.dir/cmp.c.o CMakeFiles/sparsematrix.dir/dense.c.o CMakeFiles/sparsematrix.dir/coo.c.o CMakeFiles/sparsematrix.dir/csr.c.o CMakeFiles/sparsematrix.dir/ell.c.o CMakeFiles/sparsematrix.dir/dia.c.o
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libsparsematrix.a

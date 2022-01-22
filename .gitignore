@@ -53,6 +53,8 @@ dkms.conf
 
 .ipynb_checkpoints
 *.mtx
+build
+./build
 solution
 ./solution
 solutions
