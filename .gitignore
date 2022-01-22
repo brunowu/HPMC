@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 .ipynb_checkpoints
-
+*.mtx
 solution
 ./solution
 solutions
