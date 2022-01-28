@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf("dense    : failed for allocation\n");
+        printf("dense    : matrix is too large to allocate\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf("coo    : failed for allocation\n");
+        printf("coo    : matrix is too large to allocate\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf("csr    : failed for allocation\n");
+        printf("csr    : matrix is too large to allocate\n");
     }else{
         for(int i = 0; i < mm_file->nrow; i++){
             v[i] = 0.0;
@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf("ell    : failed for allocation\n");
+        printf("ell    : matrix is too large to allocate\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){
@@ -123,7 +123,7 @@ int main(int argc, char** argv) {
     
     if(failed)
     {
-        printf("dia    : failed for allocation\n");
+        printf("dia    : matrix is too large to allocate\n");
     }else{
         
         for(int i = 0; i < mm_file->nrow; i++){

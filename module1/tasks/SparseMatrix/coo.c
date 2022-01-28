@@ -39,7 +39,6 @@ void coo_init(coo_t **coo, int m, int nnz, int* rowind, int* colind, double *val
 
 }
 
-
 void coo_free(coo_t *coo){
 	free(coo->val);
 	free(coo->rowind);
@@ -47,11 +46,9 @@ void coo_free(coo_t *coo){
 }
 
 void coo_spmv(coo_t *a, double *x, double *y){
-#pragma omp paralllel for
-	for(int i =0; i < a->nnz; i++){
-		y[a->rowind[i]] += a->val[i] * x[a->colind[i]];  
-	}
 
+	/* put your code here*/
+	
 }
 
 int coo_from_mm(coo_t **coo, const char *filename){

@@ -28,15 +28,20 @@ endif()
 
 add_subdirectory(SparseMatrix)
 
-add_subdirectory(hands-on-1)
+add_subdirectory(hands-on)
 
 add_subdirectory(homework-1)
 
-if(BLAS_FOUND)
+option(BUILD_HOMEWORK2 "Build the homework2" OFF)
+
+if(BUILD_HOMEWORK2)
+	message("======>> Build with homework 2")
+   if(BLAS_FOUND)
    add_subdirectory(homework-2)
+   endif()
 endif()
 
 
 if(CUDAToolkit_FOUND)
-  add_subdirectory(homework-3)
+  add_subdirectory(bonus)
 endif()

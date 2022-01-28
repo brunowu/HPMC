@@ -66,9 +66,17 @@ int main(int argc, char** argv) {
         //MKL part
         struct matrix_descr descr = {SPARSE_MATRIX_TYPE_GENERAL};
         sparse_matrix_t mkl_coo_handle;
-        mkl_sparse_d_create_coo(&mkl_coo_handle, SPARSE_INDEX_BASE_ZERO, coo->m, coo->m, coo->nnz, coo->rowind, coo->colind, coo->val);
-    
-	if(niter > 1){
+        
+
+        /*Begin: complete arguments of the following lines*/        
+        
+        
+        mkl_sparse_d_create_coo(&mkl_coo_handle, SPARSE_INDEX_BASE_ZERO, , , , , , );
+        
+
+        /*End*/    
+	
+    if(niter > 1){
 	    mkl_sparse_set_mv_hint(mkl_coo_handle, SPARSE_OPERATION_NON_TRANSPOSE, descr, niter);	
 	    mkl_sparse_set_memory_hint ( mkl_coo_handle, SPARSE_MEMORY_AGGRESSIVE );
 	    mkl_sparse_optimize(mkl_coo_handle);
@@ -76,7 +84,16 @@ int main(int argc, char** argv) {
 
 	for(int i = 0; i < niter; i++){
 	    t = clock();
-            mkl_sparse_d_mv(SPARSE_OPERATION_NON_TRANSPOSE, alpha, mkl_coo_handle, descr, u, beta, v);
+    
+
+            /*Begin: complete arguments of the following lines*/              
+            
+            
+            mkl_sparse_d_mv(SPARSE_OPERATION_NON_TRANSPOSE, , , , , , );        
+    
+
+            /*End*/    
+
             t = clock() - t;
             printf("(%d): MKL SpMV (COO) time: %fs\n", i + 1, ((double) t )/CLOCKS_PER_SEC );	
 	}

@@ -46,12 +46,9 @@ void csr_free(csr_t *csr){
 }
 
 void csr_spmv(csr_t *a, double *x, double *y){
-#pragma omp parallel for
-	for(int i = 0; i < a->m; i++){
-		for(int j = a->rowoffs[i]; j < a->rowoffs[i+1]; j++){
-			y[i] += a->val[j] * x[a->colind[j]];
-		}
-	}
+
+		/* put your code here*/
+
 }
 
 int csr_from_mm(csr_t **csr, const char *filename){

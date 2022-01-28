@@ -47,16 +47,9 @@ void dia_free(dia_t *dia){
 }
 
 void dia_spmv(dia_t *a, double *x, double *y){
-#pragma omp parallel for
-	for(int i = 0; i < a->m; i++){
-		for(int j = 0; j < a->ndiag; j++){
-			int start = max(-a->diag[j], 0);
-			int end = a->diag[j] > 0 ?  a->m - a->diag[j] : a->m;
-			if((i >= start) && (i < end)){
-				y[i] += a->val[j * a->m + i] * x[i + a->diag[j]];
-			}
-		}
-	}
+
+	/* put your code here*/
+	
 }
 
 int dia_from_mm(dia_t **dia, const char *filename){

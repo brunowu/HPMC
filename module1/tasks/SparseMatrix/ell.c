@@ -44,13 +44,9 @@ void ell_free(ell_t *ell){
 
 void ell_spmv(ell_t *a, double *x, double *y){
 	//column major format
-#pragma omp parallel for
-	for(int i = 0; i < a->m; i++){
-		for(int j = 0; j < a->max_row; j++){
-			const int idx = i + j * a->m;
-			y[i] += a->val[idx] * x[a->colind[idx]];
-		}
-	}
+
+	/* put your code here*/
+		
 }
 
 int ell_from_mm(ell_t **ell, const char *filename){
